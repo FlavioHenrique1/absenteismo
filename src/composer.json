@@ -1,0 +1,19 @@
+{
+    "name": "flavio/mvc",
+    "description": "flavio",
+    "authors": [
+        {
+            "name": "flavio",
+            "email": "fla-henrique@hotmail.com"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\":"../app/",
+            "Src\\":"../src/"
+        }
+    }
+}
