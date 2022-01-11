@@ -140,3 +140,18 @@ a:hover{
 .ResultadoP{
     color: #F00;
 }
+
+#adicionarSelectQuali{
+    margin-top: -39px;
+    margin-left: 200px;
+    width: 200px;
+}
+#BtnPesquisa{
+    margin-top: -65px;
+    margin-left: 610px;
+}
+#inputGroupSelect02{
+    margin-top: -39px;
+    margin-left: 407px;
+    width: 200px;
+}

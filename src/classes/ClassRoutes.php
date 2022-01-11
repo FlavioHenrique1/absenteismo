@@ -26,6 +26,7 @@ class ClassRoutes{
             "Listar_Associados"=>"ControllerUsuarios",
             "Adicionar_Associados"=>"ControllerAddUsuarios",
             "Consolidado_Geral"=>"ControllerConsolidado",
+            "Qualidade"=>"ControllerQualidade",
             "Home1"=>"ControllerHome1"
         );
         if(array_key_exists($I,$this->Rota)){

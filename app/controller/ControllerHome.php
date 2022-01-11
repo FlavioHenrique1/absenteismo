@@ -2,7 +2,6 @@
 namespace App\Controller;
 
 use Src\Classes\ClassRender;
-use Src\Interfaces\InterfaceView;
 use App\Model\ClassCrud;
 
 class ControllerHome extends ClassCrud{
