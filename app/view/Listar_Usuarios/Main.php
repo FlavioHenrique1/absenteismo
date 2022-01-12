@@ -23,7 +23,7 @@
     <table id="example" class="table table-striped table-hover" style="width:100%">
         <thead class="table table-sm">
         <caption>Lista de usuários</caption>
-            <tr>
+            <tr class="table-dark">
                 <th>Prontuário</th>
                 <th class="text-center">Name</th>
                 <th class="text-center">Função</th>

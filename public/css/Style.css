@@ -147,11 +147,20 @@ a:hover{
     width: 200px;
 }
 #BtnPesquisa{
-    margin-top: -65px;
-    margin-left: 610px;
+    margin-top: -113px;
+    margin-left: 815px;
 }
 #inputGroupSelect02{
     margin-top: -39px;
-    margin-left: 407px;
+    margin-left: 405px;
     width: 200px;
+}
+#ProntPesq{
+    margin-top: -65px;
+    margin-left: 610px;
+    width: 200px;
+}
+#inputGroupSelect01{
+    width: 150px;
+    height:33px;
 }

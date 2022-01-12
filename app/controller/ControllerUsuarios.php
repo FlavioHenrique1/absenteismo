@@ -42,7 +42,7 @@ class ControllerUsuarios extends ClassCrud{
         $Turno=$Fetch['Turno'];
         $Tel=$Fetch['Tel'];
         $n=new ClassOption();
-$g=$n->InsetSetor("adicionarSelect");
+        $g=$n->InsetSetor("adicionarSelect");
 
         echo"<!DOCTYPE html>
         <html lang='pt-br'>

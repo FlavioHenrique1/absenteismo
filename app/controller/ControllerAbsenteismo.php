@@ -55,8 +55,6 @@ class ControllerAbsenteismo extends ClassCrud{
                         $resp
                     )
                 );
-                $this->updateDB("Absenteismo","Status=?","Nome=?",array($Status[$i],$nome[$i]));
-
                 $erro =0;
             }else{
                 $erro =1;

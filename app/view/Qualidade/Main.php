@@ -1,9 +1,10 @@
 <div class="container p-3 mb-2 bg-light">
     <div>
-        <h4>Selecione a data para visualizar</h4>
+        <h4>Preencha os campos abaixo para continuar</h4>
+        <p>Prontuário não é obrigatorio</p>
     </div>
     <div class="input-group mb-3">
-        <form name="FormDataH" id="FormDataH" class="form-inline" method="post" action="<?php echo DIRPAGE . 'Home1/BuscarDados' ?>">
+        <form name="FormPesq" id="FormPesq" class="form-inline" method="post" action="<?php echo DIRPAGE . 'Qualidade/PesquisarDadosBD' ?>">
 
             <div class="col-md-8">
                 <input type="date" class="form-control" name="DataP">
@@ -18,6 +19,7 @@
                     <option value="3º Turno">3º Turno</option>
                     <option value="Intermediário">Intermediário</option>
                 </select>
+                <input type="number" class="form-control" name="Pront" placeholder="Prontuário" id="ProntPesq">
                 <input type="submit" value="Pesquisar" class="btn btn-primary" id="BtnPesquisa">
             </div>
         </form>

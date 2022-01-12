@@ -3,6 +3,8 @@ namespace App\Controller;
 
 use Src\Classes\ClassRender;
 use App\Model\ClassCrud;
+use Src\Classes\ClassOption;
+
 
 class ControllerHome extends ClassCrud{
 
@@ -67,38 +69,12 @@ class ControllerHome extends ClassCrud{
                         }
                     }
                    $Id=$Fetch['Id'];
+                   $Status=$Fetch['Status'];
+                   $n = new ClassOption();
                    if ($tData != null){
                     $tb="
                     <form name='LancAltAbs' id='LancAltAbs' action='".DIRPAGE."Home1/AlterarAb' method='post'>
-                    <td>
-                    <select name='Status[]' class='form-select' id='inputGroupSelect01'>
-                        <option value='".$Fetch['Status']."' >".$Fetch['Status']."</option>
-                        <option  class='verd' value='P'>P</option>
-                        <option class='verme' value='F'>F</option>
-                        <option class='cin' value='SUP'>SUP</option>
-                        <option value='EXT_ENC'>EXT ENC</option>
-                        <option value='FAC_ENC'>FAC ENC</option>
-                        <option class='BH' value='BH'>BH</option>
-                        <option value='FERIAS'>FÉRIAS</option>
-                        <option value='EXT'>EXT</option>
-                        <option value='DSR'>DSR</option>
-                        <option value='FERIADO'>FERIADO</option>
-                        <option class='cin' value='SUM'>SUM</option>
-                        <option value='FAC'>FAC</option>
-                        <option value='CURSO'>CURSO</option>
-                        <option value='TC_JOVEM'>TC JOVEM</option>
-                        <option value='F_JOVEM'>F JOVEM</option>
-                        <option value='DSR_JOVEM'>DSR JOVEM</option>
-                        <option value='FERIADO_JOVEM'>FERIADO JOVEM</option>
-                        <option value='FERIAS_JOVEM'>FÉRIAS JOVEM</option>
-                        <option value='JOVEM'>JOVEM</option>
-                        <option value='D'>D</option>
-                        <option value='DSR_OBT'>DSR OBT</option>
-                        <option value='INSS'>INSS</option>
-                        <option value='SUSP'>SUSP</option>
-                        <option value='TRANSF'>TRANSF</option>
-                    </select>
-                </td>";
+                    <td>".$n->InsertStatus($Status)."</td>";
                     $tp="      
                     <th>
                         <input type='hidden' name='Id[]' value='". $Id."'>
