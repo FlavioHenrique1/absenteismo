@@ -31,32 +31,32 @@ class ControllerLogin extends ClassLogin{
     #Validar o login do usuario
     public function validarLogin()
     {
-        $Usuario=$_POST['Usuario'];
-        $Senha=$_POST['Senha'];
-        $Setor=$_POST['Setor'];
-        $Turno=$_POST['Turno'];
-        $Validacao=$this->validarUsuario($Usuario,$Senha,$Setor,$Turno);
-        if($Validacao==true){
-            echo json_encode(array("erro" => 0));
-            #echo "<script>window.location='".DIRPAGE."cadastro'</script>";
+        $campos = Array("Usuario", "Senha","Setor","Turno");
+        $valido = $this->ValidarDados($campos);
+
+        if($valido==false){
+            echo json_encode(array("erro" => 1, "mensagem" => "Preencher todos os campos para entrar."));
         }else{
-            echo json_encode(array("erro" => 1, "mensagem" => "Prontuário e/ou senha incorretos."));
+            $Usuario=$_POST['Usuario'];
+            $Senha=$_POST['Senha'];
+            $Setor=$_POST['Setor'];
+            $Turno=$_POST['Turno'];
+            $Validacao=$this->validarUsuario($Usuario,$Senha,$Setor,$Turno);
+            if($Validacao==true){
+                echo json_encode(array("erro" => 0));
+                #echo "<script>window.location='".DIRPAGE."cadastro'</script>";
+            }else{
+                echo json_encode(array("erro" => 1, "mensagem" => "Prontuário e/ou senha incorretos."));
+            }
         }
     }
 
         #Validar o login do usuario
         public function atualizarDados()
         {
-            $valido = true;
-            $campos = Array("Nome", "Prontuario", "Senha");
 
-            foreach ($campos as $campo){
-                if (empty($_POST[$campo])){
-                    echo "<p>Campo $campo em branco</p>";
-                    $valido = false;
-                }
-            }
-
+            $campos = Array("Nome", "Prontuario", "Senha","Setor","Turno");
+            $valido= $this->ValidarDados($campos);
             $Id=$_POST['Id'];
             if(isset($_POST['Nome'])){$this->Nome=filter_input(INPUT_POST, 'Nome', FILTER_SANITIZE_SPECIAL_CHARS);}else{$erro=1;}
             if(isset($_POST['Prontuario'])){$this->Prontuario=filter_input(INPUT_POST,'Prontuario', FILTER_SANITIZE_SPECIAL_CHARS); }
@@ -74,11 +74,21 @@ class ControllerLogin extends ClassLogin{
                 echo "<script>window.location='".DIRPAGE."'</script>";
             }
         }
+        public function ValidarDados($campos){
+            $valido = true;
+            foreach ($campos as $campo){
+                if (empty($_POST[$campo])){
+                    $valido = false;
+                }
+            }
+            return $valido;
+        }
     
 
 
     #Destruir a sessão
     public function DestruirSession(){
+        @session_start();
         foreach(array_keys($_SESSION) as $Key){
             unset($_SESSION[$Key]);
         }

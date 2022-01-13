@@ -25,5 +25,4 @@
         </form>
     </div>
     <div class="ResultadoF"></div>
-    <div id="Resultado" class="Resultado"></div>
 </div>

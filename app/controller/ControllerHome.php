@@ -76,9 +76,9 @@ class ControllerHome extends ClassCrud{
                     <form name='LancAltAbs' id='LancAltAbs' action='".DIRPAGE."Home1/AlterarAb' method='post'>
                     <td>".$n->InsertStatus($Status)."</td>";
                     $tp="      
-                    <th>
+                    <td style='visibility:hidden;'>
                         <input type='hidden' name='Id[]' value='". $Id."'>
-                    </th>";
+                    </td>";
                     $tt="<button class='btn btn-warning btn-xs'>
                     <i class='fa fa-user-edit'>Alterar</i>
                     </button>
