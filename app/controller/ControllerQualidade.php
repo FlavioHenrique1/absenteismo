@@ -27,7 +27,7 @@ class ControllerQualidade extends ClassCrud{
         
         $this->recVariaveis();
         $Data=date("d/m/Y",strtotime($this->Data));
-            $tt="";
+
             $tabela= "
             <table id='tbHome' class='table table-striped table-bordered' style='width:100%'>   
             <thead>
@@ -61,7 +61,6 @@ class ControllerQualidade extends ClassCrud{
                         );
                     }
                     while($Fetch=$BFetch->fetch(\PDO::FETCH_ASSOC)){
-                        
                         if ($Fetch['Status']=="P"){
                             $Classe="Class=lverd";
                         }else{
@@ -75,7 +74,7 @@ class ControllerQualidade extends ClassCrud{
                        $Status=$Fetch['Status'];
                        $n = new ClassOption();
                         $tb="
-                        <form name='LancAltAbs' id='LancAltAbs' action='".DIRPAGE."Home1/AlterarAb' method='post'>
+                        <form name='LancAltAbsQua' id='LancAltAbsQua' class='LancAltAbsQua' action='".DIRPAGE."Qualidade/AlterarAbQua' method='post'>
                         <td>".$n->InsertStatus($Status)."</td>";
                         $tp="      
                         <td style='visibility:hidden;'>
@@ -84,9 +83,8 @@ class ControllerQualidade extends ClassCrud{
                         $tt="<button class='btn btn-warning btn-xs'>
                         <i class='fa fa-user-edit'>Alterar</i>
                         </button>
-                    </form>";
-
-                    $tabela.="<tr>
+                            </form>";
+                        $tabela.="<tr>
                     <td>". $Fetch['Prontuario']."</td>
                     <td>". $Fetch['Nome']."</td>
                     <td>".$Fetch['Funcao']."</td>
@@ -101,11 +99,11 @@ class ControllerQualidade extends ClassCrud{
                 <tfoot>
                 </tfoot>
                 
-            </table>".$tt."
+            </table>
     
         </div>
             ";
-            echo $tabela;
+            echo $tabela.$tt;
     }
 
     private function recVariaveis()
@@ -115,6 +113,24 @@ class ControllerQualidade extends ClassCrud{
         if(isset($_POST['Turno'])){ $this->Turno=filter_input(INPUT_POST, 'Turno', FILTER_SANITIZE_SPECIAL_CHARS); }
         if(isset($_POST['Setor'])){ $this->Setor=filter_input(INPUT_POST, 'Setor', FILTER_SANITIZE_SPECIAL_CHARS); }
         
+    }
+
+    public function AlterarAbQua(){
+       /* $Id=$_POST['Id'];
+    
+        $n=new ClassCrud();
+        for($i = 0; $i < count($Id); $i++) {
+            if(isset($_POST['Status'])){
+                $Status = $_POST['Status'];
+                if(isset($Status[$i])){
+                    $n->updateDB("absenteismo","Status=?","Id=?",array($Status[$i],$Id[$i]));
+                    
+                }else{  
+                    
+                }
+            }
+        }*/
+        echo "Dados Alterado";
     }
 
 }

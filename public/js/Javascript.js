@@ -187,7 +187,7 @@ $("#BtnMfechar").click(function () {
     window.location = DIRPAGE;
 });
 
-//Ajas Alterar abs Qualidade
+//Ajas Pesquisar abs Qualidade
 $(document).ready(function () {
     $('#FormPesq').on('submit', function (event) {
         event.preventDefault();
@@ -204,3 +204,21 @@ $(document).ready(function () {
         });
     });
 });
+    //Ajas Alterar abs
+    $(document).ready(function () {
+        $('#LancAltAbsQua').on('submit', function (event) {
+            event.preventDefault();
+            $('.ResultadoQ').append('');
+            var Dados = $(this).serialize();
+            $.ajax({
+                url: DIRPAGE + 'Qualidade/AlterarAbQua',
+                method: 'post',
+                dataType: 'html',
+                data: Dados,
+                success: function (Dados) {
+                    $('.ResultadoQ').html(Dados);
+                }
+            });
+        });
+    });
+
