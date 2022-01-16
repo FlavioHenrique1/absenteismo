@@ -27,7 +27,7 @@ class ControllerQualidade extends ClassCrud{
         
         $this->recVariaveis();
         $Data=date("d/m/Y",strtotime($this->Data));
-
+        $tt="";
             $tabela= "
             <table id='tbHome' class='table table-striped table-bordered' style='width:100%'>   
             <thead>

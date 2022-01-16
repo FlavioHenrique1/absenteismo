@@ -90,6 +90,7 @@ class ControllerAddUsuarios extends ClassCrud{
                 $Dados['Data']=$Fetch['Data_Admissao'];
             }else{
                 $Dados['Nome']='Prontuario não encontrado';
+                $Dados['Msg']="<script>alert('Dados inseridos com sucesso!');</script>";
             }
             echo json_encode($Dados);
         }

@@ -171,6 +171,7 @@ $(document).ready(function () {
                     $Nome.val(Dados.Nome);
                     $Data.val(Dados.Data);
                     $Funcao.val(Dados.Funcao);
+                    $('.ResultadoP').html(Dados.Msg);
                 }
             }
         });
