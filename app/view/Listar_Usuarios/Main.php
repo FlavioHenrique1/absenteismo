@@ -20,7 +20,7 @@
             </div>
         </div>
     </section>
-    <table id="example" class="table table-striped table-hover" style="width:100%">
+    <table id="example" class="table table-striped table-hover table-sm" style="width:100%">
         <thead class="table table-sm">
         <caption>Lista de usuários</caption>
             <tr class="table-dark">
@@ -28,7 +28,6 @@
                 <th class="text-center">Name</th>
                 <th class="text-center">Função</th>
                 <th class="text-center">Data Admissão</th>
-                <th class="text-center">Data</th>
                 <th class="text-center">Setor</th>
                 <th colspan="3" class="text-center">Opção</th>
             </tr>
@@ -53,7 +52,6 @@
                 <th class="text-center"><?php echo $Fetch['Funcao'];?></</th>
                 <th class="text-center"><?php echo $Fetch['Data_Admissao'];?></</th>
                 <th class="text-center"><?php echo $Fetch['Setor'];?></th>
-                <th>Status</th>
                 <th>
                     <form action="<?php echo DIRPAGE.'Listar_Associados/AlterarDadosAssoc'?>" method="post">
                     <input type="hidden" name="Id" value="<?php echo $Fetch['Id'];?>">
