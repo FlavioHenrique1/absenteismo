@@ -88,9 +88,16 @@ class ControllerAddUsuarios extends ClassCrud{
                 $Dados['Nome']= $Fetch['Nome'];
                 $Dados['Funcao']=$Fetch['Funcao'];
                 $Dados['Data']=$Fetch['Data_Admissao'];
+                if($Fetch['Status']=='Ativo'){
+                    $Dados['Msg']="<script>var r=confirm('Prontuário ja cadastrado deseja realizar a transferencia ?');
+                if (r==true){
+
+                    }else{
+                        window.location='".DIRPAGE."Adicionar_Associados'}
+                </script>";
+                }
             }else{
-                $Dados['Nome']='Prontuario não encontrado';
-                $Dados['Msg']="<script>alert('Dados inseridos com sucesso!');</script>";
+                $Dados['Msg']='Prontuario não encontrado';
             }
             echo json_encode($Dados);
         }

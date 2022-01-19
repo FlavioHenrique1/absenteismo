@@ -14,5 +14,5 @@
     <div id="Resultado" class="Resultado"><?php
         $n=new ControllerConsolidado();
         $data = date('d/m/Y');
-    $n->BuscarDados($data); ?></div>
+    $n->BuscarDados(); ?></div>
 </div>

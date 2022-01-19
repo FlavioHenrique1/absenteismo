@@ -20,17 +20,20 @@ class ControllerConsolidado extends ClassCrud{
             $Render->renderLayout();
         }
     }
-    public function BuscarDados($Data=null){
+    public function BuscarDados(){
         @session_start();
         $Setor= $_SESSION["setor_usuario"];
         if(isset($_POST['DataP'])){
             $v_Data = $_POST['DataP'];
             $Data= date('d/m/Y', strtotime($v_Data));
+            $V_Mes=  date('M', strtotime($Data));
+        }else{
+            $Data = date('Y-m-d');
+            $V_Mes=  date('M', strtotime($Data));
+            $Data = date('d/m/Y');
         }
        #Total Mes
-        $v_data= $Data;
-        $Data= date('d/m/Y', strtotime($v_data));
-        $V_Mes=  date('M', strtotime($Data));
+        $v_data = $Data;
         $b = $this->selectDB("*"," absenteismo ","where Mes=? and Setor=? and Status= ?",array($V_Mes,$Setor,"P"));
         $P=$b->rowCount();
         $b = $this->selectDB("*"," absenteismo ","where Mes=? and Setor=?",array($V_Mes,$Setor));

@@ -166,7 +166,7 @@ $(document).ready(function () {
             data: Dados,
             success: function (Dados) {
                 if (Dados.Nome == "Prontuario não encontrado") {
-                    $('.ResultadoP').html(Dados.Nome);
+                    $('.ResultadoP').html(Dados.Msg);
                 } else {
                     $Nome.val(Dados.Nome);
                     $Data.val(Dados.Data);
@@ -205,21 +205,20 @@ $(document).ready(function () {
         });
     });
 });
-    //Ajas Alterar abs
-    $(document).ready(function () {
-        $('#LancAltAbsQua').on('submit', function (event) {
-            event.preventDefault();
-            $('.ResultadoQ').append('');
-            var Dados = $(this).serialize();
-            $.ajax({
-                url: DIRPAGE + 'Qualidade/AlterarAbQua',
-                method: 'post',
-                dataType: 'html',
-                data: Dados,
-                success: function (Dados) {
-                    $('.ResultadoQ').html(Dados);
-                }
-            });
+
+$(document).ready(function () {
+    $('#LancAltQual').on('submit', function (event) {
+        event.preventDefault();
+        $('.ResultadoF').append('');
+        var Dados = $(this).serialize();
+        $.ajax({
+            url: DIRPAGE + 'Qualidade/AlterarAbQua',
+            method: 'post',
+            dataType: 'html',
+            data: Dados,
+            success: function (Dados) {
+                $('.ResultadoF').html(Dados);
+            }
         });
     });
-
+});
