@@ -97,7 +97,7 @@ class ControllerAddUsuarios extends ClassCrud{
                 </script>";
                 }
             }else{
-                $Dados['Msg']='Prontuario não encontrado';
+                $Dados['Msg']='Prontuário não encontrado';
             }
             echo json_encode($Dados);
         }

@@ -33,7 +33,7 @@ class ControllerConsolidado extends ClassCrud{
             $Data = date('d/m/Y');
         }
        #Total Mes
-        $v_data = $Data;
+         $v_data = $Data;
         $b = $this->selectDB("*"," absenteismo ","where Mes=? and Setor=? and Status= ?",array($V_Mes,$Setor,"P"));
         $P=$b->rowCount();
         $b = $this->selectDB("*"," absenteismo ","where Mes=? and Setor=?",array($V_Mes,$Setor));
