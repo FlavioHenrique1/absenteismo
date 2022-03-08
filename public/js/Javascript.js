@@ -222,3 +222,40 @@ $(document).ready(function () {
         });
     });
 });
+$(document).ready(function(){
+    $(document).on('click','.view_data',function(){
+        $(this).attr("id");
+        var user_id = $(this).attr("id");
+        var $Nome = $("input[name='Nome']");
+        var $Pront = $("input[name='Prontuario']");
+        var $Turno = $("input[name='Turno']");
+        var $Tel = $("input[name='telef']");
+        var $Funcao = $("input[name='Funcao']");
+        var $Setor = $("input[name='Setor']");
+        var $dataadm = $("input[name='dataadm']");
+
+        
+        //Verificar se ha valor na variavel user id
+        if(user_id !== ''){
+            var Dados = {
+                user_id: user_id
+            };
+            $.ajax({
+                url: DIRPAGE + 'Listar_Associados/visualizarAssoc',
+                method: 'post',
+                dataType: 'json',
+                data: Dados,
+                success: function (Dados) {
+                    $Nome.val(Dados.Nome);
+                    $Pront.val(Dados.Pront);
+                    $Turno.val(Dados.Turno);
+                    $Tel.val(Dados.Tel);
+                    $dataadm.val(Dados.Data);
+                    $Funcao.val(Dados.Funcao);
+        
+                    $('#ModalViewPerfilUser').modal('show');
+                }
+            });
+        }
+    });
+});

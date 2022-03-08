@@ -183,6 +183,41 @@ class ControllerUsuarios extends ClassCrud{
         </script>";
         echo "<script>window.location='".DIRPAGE."Listar_Associados'</script>";
     }
+    public function visualizarAssoc()
+    {
+        if(isset($_POST["user_id"])){
+            $Id=$_POST["user_id"];
+            $BFetch = $this->selectDB(
+                "*",
+                "dados ",
+                "where Id=?",
+                array($Id)
+            );
+            $Fetch=$BFetch->fetch(\PDO::FETCH_ASSOC);
+            if($Row=$BFetch->rowCount()>0){
+                $Dados['Pront']= $Fetch['Prontuario'];
+                $Dados['Setor']= $Fetch['Setor'];
+                $Dados['Nome']= $Fetch['Nome'];
+                $Dados['Tel']= $Fetch['Tel'];
+                $Dados['Funcao']=$Fetch['Funcao'];
+                $Dados['Data']=$Fetch['Data_Admissao'];
+                $Dados['Turno']=$Fetch['Turno'];
+                if($Fetch['Status']=='Ativo'){
+                    $Dados['Msg']="<script>var r=confirm('Prontuário ja cadastrado deseja realizar a transferencia ?');
+                if (r==true){
+
+                    }else{
+                        window.location='".DIRPAGE."Adicionar_Associados'}
+                </script>";
+                }
+            }else{
+                $Dados['Msg']='Prontuário não encontrado';
+            }
+            echo json_encode($Dados);
+        }
+
+        
+    }
 
 
 }

@@ -34,6 +34,7 @@ class ControllerConsolidado extends ClassCrud{
         }
        #Total Mes
          $v_data = $Data;
+         $diaArr= $this->retDia($v_data,$Setor);
         $b = $this->selectDB("*"," absenteismo ","where Mes=? and Setor=? and Status= ?",array($V_Mes,$Setor,"P"));
         $P=$b->rowCount();
         $b = $this->selectDB("*"," absenteismo ","where Mes=? and Setor=?",array($V_Mes,$Setor));
@@ -56,29 +57,7 @@ class ControllerConsolidado extends ClassCrud{
             $A = round(($F/$QLiq)*100, 2, PHP_ROUND_HALF_DOWN) ."%";
         }
         #-------------------------------------------------
-        #Total dia
-        $b = $this->selectDB("*"," absenteismo ","where Data=? and Setor=?",array($v_data,$Setor));
-        $PD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Data=? and Setor=? and Status= ?",array($v_data,$Setor,"P"));
-        $PPD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Setor=? and Data=?",array($Setor,$v_data));
-        $CD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("F",$Setor,$v_data));
-        $FD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("INSS",$Setor,$v_data));
-        $InssD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("COV-19",$Setor,$v_data));
-        $CovidD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("D",$Setor,$v_data));
-        $DD=$b->rowCount();
-        $b = $this->selectDB("*"," absenteismo ","where Status like  ? and Setor=? and Data=?",array("%SUM%",$Setor,$v_data));
-        $SUMD=$b->rowCount();
-        $QLiqD= $PD - $Inss - $Covid;
-    if ($QLiqD <="0"){
-            $AD = "0%";
-    }else{
-        $AD = round(($FD/$QLiqD)*100, 2, PHP_ROUND_HALF_DOWN) ."%";
-    }
+
         #------------------------------------------------------
         #Total turno
         
@@ -117,7 +96,7 @@ class ControllerConsolidado extends ClassCrud{
                 $cor = "Class=lverd";
             }
         }
-        if(($FD/$QLiqD)*100>=3){
+        if(($diaArr['F']/$diaArr['qLiq'])*100>=3){
             $corD = "Class=lverm";
         }else{
             $corD = "Class=lverd";
@@ -143,54 +122,54 @@ class ControllerConsolidado extends ClassCrud{
                 <tr>
                 <th>Absenteísmo</th>
                 <th ". $cor .">".$A."</th>
-                <th ". $corD .">".$AD."</th>
+                <th ". $corD .">".$diaArr['Ab']. "</th>
                 <th ". $corT .">".$AT."</th>
                 </tr><tr>
                 <th>Quadro Líquido</th>
                 <th>".$QLiq."</th>
-                <th>".$QLiqD."</th>
+                <th>".$diaArr['qLiq']."</th>
                 <th>".$QLiqT."</th>
                 </tr>
                 <tr>
                 <th>Faltas / Atestados</th>
                 <th Class=lverm>".$F."</th>
-                <th Class=lverm>".$FD."</th>
+                <th Class=lverm>".$diaArr['F']."</th>
                 <th Class=lverm>".$FT."</th>
                 </tr>
                 <tr>
                 <th>Quadro Total</th>
                 <th>".$C."</th>
-                <th>".$CD."</th>
+                <th>".$diaArr['total']."</th>
                 <th>".$CT."</th>
                 </tr>
                 <tr>
                 <th>Inativo(INSS)</th>
                 <th>".$Inss."</th>
-                <th>".$InssD."</th>
+                <th>".$diaArr['inss']."</th>
                 <th>".$InssT."</th>
                 </tr>
                 <tr>
                 <th>Sumido</th>
                 <th>".$SUM."</th>
-                <th>".$SUMD."</th>
+                <th>".$diaArr['sum']."</th>
                 <th>".$SUMT."</th>
                 </tr>
                 <tr>
                 <th>Demitido</th>
                 <th>".$D."</th>
-                <th>".$DD."</th>
+                <th>".$diaArr['D']."</th>
                 <th>".$DT."</th>
                 </tr>
                 <tr>
                 <th>Afastado (COVID-19)</th>
                 <th>".$Covid."</th>
-                <th>".$CovidD."</th>
+                <th>".$diaArr['cov']."</th>
                 <th>".$CovidT."</th>
                 </tr>
                 <tr>
                 <th>Presente</th>
                 <th Class=lverd>".$P."</th>
-                <th Class=lverd>".$PPD."</th>
+                <th Class=lverd>".$diaArr['P']."</th>
                 <th Class=lverd>".$PPT."</th>
                 </tr>
         <tfoot>
@@ -200,5 +179,43 @@ class ControllerConsolidado extends ClassCrud{
     </table>
         ";
         echo $tabela;
+    }
+    public function retDia($v_data,$Setor){
+                #-------------------------------------------------
+        #Total dia
+        $diaarr=array();
+
+        $b = $this->selectDB("*"," absenteismo ","where Data=? and Setor=?",array($v_data,$Setor));
+        $PD=$b->rowCount();
+        $diaarr['total'] = $PD;
+        $b = $this->selectDB("*"," absenteismo ","where Data=? and Setor=? and Status= ?",array($v_data,$Setor,"P"));
+        $PPD=$b->rowCount();
+        $diaarr['P']=$PPD;
+        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("F",$Setor,$v_data));
+        $FD=$b->rowCount();
+        $diaarr['F']=$FD;
+        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("INSS",$Setor,$v_data));
+        $InssD=$b->rowCount();
+        $diaarr['inss']=$InssD;
+        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("COV-19",$Setor,$v_data));
+        $CovidD=$b->rowCount();
+        $diaarr['cov']=$CovidD;
+        $b = $this->selectDB("*"," absenteismo ","where Status= ? and Setor=? and Data=?",array("D",$Setor,$v_data));
+        $DD=$b->rowCount();
+        $diaarr['D']=$DD;
+        $b = $this->selectDB("*"," absenteismo ","where Status like  ? and Setor=? and Data=?",array("%SUM%",$Setor,$v_data));
+        $SUMD=$b->rowCount();
+        $diaarr['sum']=$SUMD;
+        $QLiqD= $PD - $InssD - $CovidD;
+        $diaarr['qLiq']=$QLiqD;
+
+    if ($QLiqD <="0"){
+            $AD = "0%";
+    }else{
+        $AD = round(($FD/$QLiqD)*100, 2, PHP_ROUND_HALF_DOWN) ."%";
+    }
+        $diaarr['Ab']=$AD;
+        return $diaarr;
+        #------------------------------------------------------
     }
 }
